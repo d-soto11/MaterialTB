@@ -13,7 +13,7 @@ class MaterialTB: UIViewController {
     private static var currentTapBar: MaterialTB?
     private(set) public static var tapBarLoaded: Bool = false
     
-    @IBInspectable var initialViewController: Int = -1 {
+    @IBInspectable var initialViewController: Int = 0 {
         didSet {
             initialViewController = min(initialViewController, 4)
         }
@@ -21,6 +21,7 @@ class MaterialTB: UIViewController {
     @IBInspectable var tabBarHeigth: CGFloat = 65
     @IBInspectable var selectedTint: UIColor = .blue
     @IBInspectable var idleTint: UIColor = .lightGray
+    @IBInspectable var tabBarBackgroundColor: UIColor = .white
     @IBInspectable var fontSize: CGFloat = 12 {
         didSet {
             if let f = UIFont(name: fontFamily, size: fontSize) {
@@ -65,12 +66,15 @@ class MaterialTB: UIViewController {
         // Configure views
         // TABBAR
         tabBarBackground = UIView()
+        tabBarBackground.backgroundColor = tabBarBackgroundColor
+        tabBarBackground.translatesAutoresizingMaskIntoConstraints = false
         // Buttons Stack
         buttonsStackView = UIStackView()
         buttonsStackView.axis = .horizontal
         buttonsStackView.spacing = 10
         buttonsStackView.alignment = .fill
         buttonsStackView.distribution = .fill
+        buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
         tabBarBackground.addSubview(buttonsStackView)
         // Images Stack
         imagesStackView = UIStackView()
@@ -78,14 +82,17 @@ class MaterialTB: UIViewController {
         imagesStackView.spacing = 10
         imagesStackView.alignment = .fill
         imagesStackView.distribution = .fill
-        tabBarBackground.addSubview(imagesStackView)
+        imagesStackView.translatesAutoresizingMaskIntoConstraints = false
+        tabBarBackground.insertSubview(imagesStackView, belowSubview: buttonsStackView)
         // Labels Stack
         labelsStackView = UIStackView()
         labelsStackView.axis = .horizontal
         labelsStackView.spacing = 10
         labelsStackView.alignment = .top
         labelsStackView.distribution = .fill
-        tabBarBackground.addSubview(labelsStackView)
+        labelsStackView.translatesAutoresizingMaskIntoConstraints = false
+        tabBarBackground.insertSubview(labelsStackView, belowSubview: imagesStackView)
+        // Labels Constraint
         let cLabelsHeight = NSLayoutConstraint(item: labelsStackView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 25)
         self.labelsStackView.addConstraint(cLabelsHeight)
         // Tabbar Constraints
@@ -109,19 +116,24 @@ class MaterialTB: UIViewController {
         self.view.addSubview(tabBarBackground)
         // SNACK
         snackView = UIView()
+        snackView.translatesAutoresizingMaskIntoConstraints = false
         let snackTitle = UILabel()
         snackTitle.tag = 11
         snackTitle.font = font
+        snackTitle.translatesAutoresizingMaskIntoConstraints = false
+        snackView.addSubview(snackTitle)
         // Constraints
         snackHeigth = NSLayoutConstraint(item: snackView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0)
         let cLabelY = NSLayoutConstraint(item: snackTitle, attribute: .centerY, relatedBy: .equal, toItem: snackView, attribute: .centerY, multiplier: 1, constant: 0)
         let cLabelX = NSLayoutConstraint(item: snackTitle, attribute: .centerX, relatedBy: .equal, toItem: snackView, attribute: .centerX, multiplier: 1, constant: 0)
         let cLabelLeft = NSLayoutConstraint(item: snackTitle, attribute: .leading, relatedBy: .equal, toItem: snackView, attribute: .leading, multiplier: 1, constant: 20)
         snackView.addConstraints([snackHeigth, cLabelY, cLabelX, cLabelLeft])
-        self.view.addSubview(snackView)
+        self.view.insertSubview(snackView, belowSubview: tabBarBackground)
         // MAIN
         mainView = UIView()
-        self.view.addSubview(mainView)
+        mainView.backgroundColor = .white
+        mainView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.insertSubview(mainView, belowSubview: snackView)
         // General Constraints
         let cMainLeft = NSLayoutConstraint(item: mainView, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1, constant: 0)
         let cMainRight = NSLayoutConstraint(item: mainView, attribute: .trailing, relatedBy: .equal, toItem: self.view, attribute: .trailing, multiplier: 1, constant: 0)
@@ -145,10 +157,17 @@ class MaterialTB: UIViewController {
         self.view.addGestureRecognizer(swipeLeft)
         
         MaterialTB.currentTapBar = self
+        MaterialTB.tapBarLoaded = true
+        
+        self.performSpecialSegue(id: "0", sender: self)
+        self.performSpecialSegue(id: "1", sender: self)
+        self.performSpecialSegue(id: "2", sender: self)
+        self.performSpecialSegue(id: "3", sender: self)
+        self.performSpecialSegue(id: "4", sender: self)
     }
     
     internal func addTapViewController(vc: MaterialViewController & ReloadableViewController, index: Int) {
-        guard index < viewControllers.count else {
+        guard index <= viewControllers.count else {
             print("Unable to add view controller to tap bar: Index out of bounds. Make sure you create your views in order")
             return
         }
@@ -193,6 +212,7 @@ class MaterialTB: UIViewController {
         image.highlightedImage = vc.selectedImage
         label.text = vc.tabTitle
         label.font = font
+        label.textAlignment = .center
         
         self.images[index] = image
         self.labels[index] = label
@@ -209,7 +229,7 @@ class MaterialTB: UIViewController {
         
         if selectedIndex == -1 {
             selectedIndex = initialViewController
-            if let home = viewControllers[1] {
+            if let home = viewControllers[selectedIndex] {
                 self.addChildViewController(home)
                 self.view.insertSubview(home.view, aboveSubview: self.mainView)
                 home.view.frame = self.mainView.bounds
@@ -393,6 +413,6 @@ class MaterialTB: UIViewController {
     
 }
 
-protocol ReloadableViewController {
+public protocol ReloadableViewController {
     func freshViewController() -> (MaterialViewController & ReloadableViewController)
 }

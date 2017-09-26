@@ -107,3 +107,18 @@ extension NSLayoutConstraint {
         return newConstraint
     }
 }
+
+extension UIViewController {
+    func canPerformSegue(id: String) -> Bool {
+        let segues = self.value(forKey: "storyboardSegueTemplates") as? [NSObject]
+        let filtered = segues?.filter({ $0.value(forKey: "identifier") as? String == id })
+        return (filtered?.count ?? 0 > 0)
+    }
+    
+    // Just so you dont have to check all the time
+    func performSpecialSegue(id: String, sender: AnyObject?) -> Void {
+        if canPerformSegue(id: id) {
+            self.performSegue(withIdentifier: id, sender: sender)
+        }
+    }
+}

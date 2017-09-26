@@ -9,9 +9,7 @@
 import UIKit
 
 class MaterialViewSegue: UIStoryboardSegue {
-    override init(identifier: String?, source: UIViewController, destination: UIViewController) {
-        super.init(identifier: identifier, source: source, destination: destination)
-        
+    override func perform() {
         if let material = source as? MaterialTB, let vc = destination as? (MaterialViewController & ReloadableViewController), MaterialTB.tapBarLoaded, let index = Int(identifier!) {
             material.addTapViewController(vc: vc, index: index)
         } else {

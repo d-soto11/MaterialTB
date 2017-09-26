@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "MaterialTB"
-  s.version      = "0.0.1"
+  s.version      = "0.2.0"
   s.summary      = "Material Design TabBar made in Swift with beautiful animations."
 
   s.description  = <<-DESC
@@ -16,7 +16,7 @@ iOS 11 has introduced TabBars into many of their apps, this style of navigation 
   s.author             = { "Daniel Soto" => "soto@tresastronautas.com" }
   # Or just: s.author    = "Daniel Soto"
   # s.authors            = { "Daniel Soto" => "d.soto11@uniandes.edu.co" }
-  s.social_media_url   = "www.linkedin.com/in/dansotorey"
+  # s.social_media_url   = "https://www.linkedin.com/in/dansotorey/"
 
   s.platform     = :ios, "9.0"
 
@@ -24,5 +24,5 @@ iOS 11 has introduced TabBars into many of their apps, this style of navigation 
 
   s.source_files  = "MaterialTapBar", "MaterialTapBar/**/*.{swift}"
 
-  s.resources = "MaterialTapBar/*.png"
+# s.resources = "MaterialTapBar/*.png"
 end
