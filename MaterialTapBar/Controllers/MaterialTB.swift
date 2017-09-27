@@ -337,7 +337,7 @@ class MaterialTB: UIViewController {
         }
         let previous_vc = self.viewControllers[previousIndex]!
         
-        UIView.animate(withDuration: 0.4, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
             self.images[previousIndex]!.isHighlighted = false
             self.labels[previousIndex]!.textColor = self.idleTint
