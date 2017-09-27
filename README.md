@@ -53,11 +53,11 @@ You can configure the information that will display in the TabBar for each View 
 
 ![alt text](https://preview.ibb.co/j0var5/Screen_Shot_2017_09_26_at_10_34_10_PM.png "Controller setup")
 
-Selected Image: The image that will display on the TabItem when this view controller is selected. To achieve a better look-and-feel we recomend you to use a slightly biggrer image here than in the Idle Image.
+`Selected Image`: The image that will display on the TabItem when this view controller is selected. To achieve a better look-and-feel we recomend you to use a slightly biggrer image here than in the Idle Image.
 
-Idle Image: The image that will display on the TabItem when this view controller is not selected.
+`Idle Image`: The image that will display on the TabItem when this view controller is not selected.
 
-Tab Title: The title for this view controller on the TabBar. You can leave it blank to have no text on the Tab.
+`Tab Title`: The title for this view controller on the TabBar. You can leave it blank to have no text on the Tab.
 
 #### 5. You're all setup! At this point your TabBar should work. Take into account that a TabBar-like navigation is recomended for 3-5 view controllers. MaterialTB supports 1 to 5 view controllers.
 
@@ -73,19 +73,19 @@ You can customize the look and feel of the TabBar in the atributes inspector of 
 
 ![alt text](https://preview.ibb.co/iLRejQ/Screen_Shot_2017_09_26_at_10_45_03_PM.png "Controller setup")
 
-Initial View Controller: This tells MaterialTB which Tab is the first loaded Tab when app launches. It's an Integer from 1 to 5.
+`Initial View Controller`: This tells MaterialTB which Tab is the first loaded Tab when app launches. It's an Integer from 1 to 5.
 
-Tab Bar Heigth: This allows you tu customize the TabBar heigth that suits your needs. Default is 65px
+`Tab Bar Heigth`: This allows you tu customize the TabBar heigth that suits your needs. Default is 65px
 
-Selected Tint: This is the color of the text on the TabBar label when it is selected. It should match your 'Selected Image' main color.
+`Selected Tint`: This is the color of the text on the TabBar label when it is selected. It should match your 'Selected Image' main color.
 
-Idle Tint: This is the color of the text on the TabBar label when it is not selected. It should match your 'Idle Image' main color.
+`Idle Tint`: This is the color of the text on the TabBar label when it is not selected. It should match your 'Idle Image' main color.
 
-Tab Bar Background Color: This is the color of the TabBar's background.
+`Tab Bar Background Color`: This is the color of the TabBar's background.
 
-Font Size: You can specify the size of the TabItem label's font. We recomend you to use anything from 9 to 15. Default is 12.
+`Font Size`: You can specify the size of the TabItem label's font. We recomend you to use anything from 9 to 15. Default is 12.
 
-Font Family: You can specify the Family Font for your TabBar. Default is System's. Font will fallback to default if Family specified is not found.
+`Font Family`: You can specify the Family Font for your TabBar. Default is System's. Font will fallback to default if Family specified is not found.
 
 ### Support
 
