@@ -63,6 +63,8 @@ Tab Title: The title for this view controller on the TabBar. You can leave it bl
 
 ### Demo
 
+<a href="https://imgflip.com/gif/1wllsm"><img src="https://i.imgflip.com/1wllsm.gif" title="made at imgflip.com"/></a>
+
 <a href="https://imgflip.com/gif/1wlkxn"><img src="https://i.imgflip.com/1wlkxn.gif" title="made at imgflip.com"/></a>
 
 ### Customization

@@ -321,10 +321,10 @@ class MaterialTB: UIViewController {
         case 5:
             if selectedIndex == 0 {
                 for i in 1...4 {
-                    self.animationConstraints[i] = self.animationConstraints[i]?.setMultiplier(multiplier: 0.6)
+                    self.animationConstraints[i] = self.animationConstraints[i]?.setMultiplier(multiplier: 0.5)
                 }
             } else {
-                self.animationConstraints[selectedIndex] = self.animationConstraints[selectedIndex]?.setMultiplier(multiplier: 1.8)
+                self.animationConstraints[selectedIndex] = self.animationConstraints[selectedIndex]?.setMultiplier(multiplier: 2)
                 for i in 1...4 {
                     if selectedIndex != i {
                         self.animationConstraints[i] = self.animationConstraints[i]?.setMultiplier(multiplier: 1)
@@ -341,6 +341,7 @@ class MaterialTB: UIViewController {
             self.view.layoutIfNeeded()
             self.images[previousIndex]!.isHighlighted = false
             self.labels[previousIndex]!.textColor = self.idleTint
+            self.labels[previousIndex]!.alpha = 1
             self.images[self.selectedIndex]!.isHighlighted = true
             self.labels[self.selectedIndex]!.textColor = self.selectedTint
             self.labels[self.selectedIndex]!.alpha = 1

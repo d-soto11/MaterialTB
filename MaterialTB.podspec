@@ -1,15 +1,15 @@
 Pod::Spec.new do |s|
 
   s.name         = "MaterialTB"
-  s.version      = "0.4.0"
+  s.version      = "0.5.0"
   s.summary      = "Material Design TabBar made in Swift with beautiful animations."
 
   s.description  = <<-DESC
 iOS 11 has introduced TabBars into many of their apps, this style of navigation is becomming more and more popular nowadays. Still, iOS native TabBar can be a little dull if compared to Material Design. This Pod is meant to make your Tabbars look really cool and support Material Design's focus animations.
                    DESC
 
-  s.homepage     = "http://tresastronautas.com/"
-  # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
+  s.homepage     = "https://cocoapods.org/pods/MaterialTB"
+  s.screenshots  = "https://i.imgflip.com/1wllsm.gif", "https://i.imgflip.com/1wlkxn.gif"
 
   s.license      = { :type => "MIT", :file => "LICENSE" }
 
