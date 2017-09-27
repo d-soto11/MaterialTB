@@ -10,10 +10,10 @@ import UIKit
 
 class MaterialViewSegue: UIStoryboardSegue {
     override func perform() {
-        if let material = source as? MaterialTB, let vc = destination as? (MaterialViewController & ReloadableViewController), MaterialTB.tapBarLoaded, let index = Int(identifier!) {
-            material.addTapViewController(vc: vc, index: index)
+        if let material = source as? MaterialTB, let vc = destination as? MaterialViewController, MaterialTB.tapBarLoaded, let index = Int(identifier!) {
+            material.addTapViewController(vc: vc, index: index-1)
         } else {
-            print("Error setting view controller from segue. Check that receiving view controller extends from MaterialViewController and implements ReloadableViewController")
+            print("Error setting view controller from segue. Please check that receiving view controller extends from MaterialViewController.")
         }
     }
 }

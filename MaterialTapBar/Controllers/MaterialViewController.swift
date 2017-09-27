@@ -22,10 +22,14 @@ open class MaterialViewController: UIViewController {
         }
     }
     
-    @IBInspectable var tabTitle: String = "Tab" {
+    @IBInspectable var tabTitle: String = "" {
         didSet {
             // layer.cornerRadius = cornerRadius
         }
+    }
+    
+    open func refreshViewController() -> MaterialViewController {
+        return self
     }
 
 }

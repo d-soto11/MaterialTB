@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		43E1CC8F1F7998C1002B0CF6 /* MaterialTapBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 43E1CC8D1F7998C1002B0CF6 /* MaterialTapBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		43E1CC981F799E0F002B0CF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43E1CC971F799E0F002B0CF6 /* Main.storyboard */; };
 		43E1CC9B1F799F84002B0CF6 /* MaterialTB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E1CC9A1F799F84002B0CF6 /* MaterialTB.swift */; };
 		43E1CC9E1F79A962002B0CF6 /* MaterialViewSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E1CC9D1F79A962002B0CF6 /* MaterialViewSegue.swift */; };
 		43E1CCA11F79BADC002B0CF6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E1CCA01F79BADC002B0CF6 /* Extensions.swift */; };
@@ -19,7 +18,6 @@
 		43E1CC8A1F7998C1002B0CF6 /* MaterialTapBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MaterialTapBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43E1CC8D1F7998C1002B0CF6 /* MaterialTapBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MaterialTapBar.h; sourceTree = "<group>"; };
 		43E1CC8E1F7998C1002B0CF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		43E1CC971F799E0F002B0CF6 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		43E1CC9A1F799F84002B0CF6 /* MaterialTB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialTB.swift; sourceTree = "<group>"; };
 		43E1CC9D1F79A962002B0CF6 /* MaterialViewSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialViewSegue.swift; sourceTree = "<group>"; };
 		43E1CCA01F79BADC002B0CF6 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -58,19 +56,10 @@
 			children = (
 				43E1CC9C1F79A937002B0CF6 /* Helper */,
 				43E1CC991F799F6A002B0CF6 /* Controllers */,
-				43E1CC961F799DFB002B0CF6 /* Views */,
 				43E1CC8D1F7998C1002B0CF6 /* MaterialTapBar.h */,
 				43E1CC8E1F7998C1002B0CF6 /* Info.plist */,
 			);
 			path = MaterialTapBar;
-			sourceTree = "<group>";
-		};
-		43E1CC961F799DFB002B0CF6 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				43E1CC971F799E0F002B0CF6 /* Main.storyboard */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		43E1CC991F799F6A002B0CF6 /* Controllers */ = {
@@ -161,7 +150,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43E1CC981F799E0F002B0CF6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

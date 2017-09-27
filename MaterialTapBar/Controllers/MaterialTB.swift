@@ -13,9 +13,9 @@ class MaterialTB: UIViewController {
     private static var currentTapBar: MaterialTB?
     private(set) public static var tapBarLoaded: Bool = false
     
-    @IBInspectable var initialViewController: Int = 0 {
+    @IBInspectable var initialViewController: Int = 1 {
         didSet {
-            initialViewController = min(initialViewController, 4)
+            initialViewController = min(initialViewController, 5)
         }
     }
     @IBInspectable var tabBarHeigth: CGFloat = 65
@@ -58,7 +58,7 @@ class MaterialTB: UIViewController {
     
     private var selectedIndex = -1
     
-    private var viewControllers: [Int:MaterialViewController & ReloadableViewController] = [:]
+    private var viewControllers: [Int:MaterialViewController] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -166,7 +166,7 @@ class MaterialTB: UIViewController {
         self.performSpecialSegue(id: "4", sender: self)
     }
     
-    internal func addTapViewController(vc: MaterialViewController & ReloadableViewController, index: Int) {
+    internal func addTapViewController(vc: MaterialViewController, index: Int) {
         guard index <= viewControllers.count else {
             print("Unable to add view controller to tap bar: Index out of bounds. Make sure you create your views in order")
             return
@@ -228,7 +228,7 @@ class MaterialTB: UIViewController {
         self.tabBarBackground.addInvertedShadow()
         
         if selectedIndex == -1 {
-            selectedIndex = initialViewController
+            selectedIndex = initialViewController - 1
             if let home = viewControllers[selectedIndex] {
                 self.addChildViewController(home)
                 self.view.insertSubview(home.view, aboveSubview: self.mainView)
@@ -237,7 +237,7 @@ class MaterialTB: UIViewController {
                 images[selectedIndex]?.isHighlighted = true
                 labels[selectedIndex]?.textColor = self.selectedTint
             } else {
-                print("The view controller selcted as initialViewController is not set")
+                print("The view controller selcted as initialViewController has not been configured. Make sure you added the material view segue and that the identifier is configured correctly")
             }
         }
     }
@@ -251,7 +251,7 @@ class MaterialTB: UIViewController {
     }
     
     public func reloadViewController() {
-        if let reloadedViewController = viewControllers[selectedIndex]?.freshViewController(),
+        if let reloadedViewController = viewControllers[selectedIndex]?.refreshViewController(),
             let previous_vc = self.viewControllers[selectedIndex] {
             
             previous_vc.dismiss(animated: true, completion: nil)
@@ -411,8 +411,4 @@ class MaterialTB: UIViewController {
         }
     }
     
-}
-
-public protocol ReloadableViewController {
-    func freshViewController() -> (MaterialViewController & ReloadableViewController)
 }
