@@ -159,11 +159,11 @@ class MaterialTB: UIViewController {
         MaterialTB.currentTapBar = self
         MaterialTB.tapBarLoaded = true
         
-        self.performSpecialSegue(id: "0", sender: self)
         self.performSpecialSegue(id: "1", sender: self)
         self.performSpecialSegue(id: "2", sender: self)
         self.performSpecialSegue(id: "3", sender: self)
         self.performSpecialSegue(id: "4", sender: self)
+        self.performSpecialSegue(id: "5", sender: self)
     }
     
     internal func addTapViewController(vc: MaterialViewController, index: Int) {
@@ -287,13 +287,22 @@ class MaterialTB: UIViewController {
             return
         }
         
+        UIView.animate(withDuration: 0.2) {
+            self.labels[self.selectedIndex]!.alpha = 0
+        }
+        
         let previousIndex = selectedIndex
         selectedIndex = sender.tag
         
-        UIView.animate(withDuration: 0.3, animations: {() in
-            self.labels[self.selectedIndex]?.alpha = 0
-        })
+        let selected_vc = self.viewControllers[selectedIndex]!
+        self.view.insertSubview(selected_vc.view, aboveSubview: self.mainView)
         
+        let direction = CGFloat((selectedIndex - previousIndex)/abs(selectedIndex - previousIndex))
+        
+        selected_vc.view.frame = CGRect(x: self.mainView.bounds.origin.x + (direction * self.mainView.bounds.size.width), y: self.mainView.bounds.origin.y, width: self.mainView.bounds.size.width, height: self.mainView.bounds.size.height)
+        
+        self.addChildViewController(selected_vc)
+        selected_vc.didMove(toParentViewController: self)
         
         switch viewControllers.count {
         case 4:
@@ -312,10 +321,10 @@ class MaterialTB: UIViewController {
         case 5:
             if selectedIndex == 0 {
                 for i in 1...4 {
-                    self.animationConstraints[i] = self.animationConstraints[i]?.setMultiplier(multiplier: 0.7)
+                    self.animationConstraints[i] = self.animationConstraints[i]?.setMultiplier(multiplier: 0.6)
                 }
             } else {
-                self.animationConstraints[selectedIndex] = self.animationConstraints[selectedIndex]?.setMultiplier(multiplier: 1.4)
+                self.animationConstraints[selectedIndex] = self.animationConstraints[selectedIndex]?.setMultiplier(multiplier: 1.8)
                 for i in 1...4 {
                     if selectedIndex != i {
                         self.animationConstraints[i] = self.animationConstraints[i]?.setMultiplier(multiplier: 1)
@@ -326,24 +335,9 @@ class MaterialTB: UIViewController {
             // Animate withoud width changes
             break
         }
-        
-        
         let previous_vc = self.viewControllers[previousIndex]!
-        previous_vc.willMove(toParentViewController: nil)
-        previous_vc.view.removeFromSuperview()
-        previous_vc.removeFromParentViewController()
         
-        let selected_vc = self.viewControllers[selectedIndex]!
-        self.view.insertSubview(selected_vc.view, aboveSubview: self.mainView)
-        
-        let direction = CGFloat((selectedIndex - previousIndex)/abs(selectedIndex - previousIndex))
-        
-        selected_vc.view.frame = CGRect(x: self.mainView.bounds.origin.x + (direction * self.mainView.bounds.size.width), y: self.mainView.bounds.origin.y, width: self.mainView.bounds.size.width, height: self.mainView.bounds.size.height)
-        
-        self.addChildViewController(selected_vc)
-        selected_vc.didMove(toParentViewController: self)
-        
-        UIView.animate(withDuration: 0.3, animations: {() in
+        UIView.animate(withDuration: 0.4, animations: {
             self.view.layoutIfNeeded()
             self.images[previousIndex]!.isHighlighted = false
             self.labels[previousIndex]!.textColor = self.idleTint
@@ -351,8 +345,12 @@ class MaterialTB: UIViewController {
             self.labels[self.selectedIndex]!.textColor = self.selectedTint
             self.labels[self.selectedIndex]!.alpha = 1
             selected_vc.view.frame = self.mainView.bounds
-        })
-        
+            previous_vc.view.frame = CGRect(x: self.mainView.bounds.origin.x - (direction * self.mainView.bounds.size.width), y: self.mainView.bounds.origin.y, width: self.mainView.bounds.size.width, height: self.mainView.bounds.size.height)
+        }) { (completed) in
+            previous_vc.willMove(toParentViewController: nil)
+            previous_vc.view.removeFromSuperview()
+            previous_vc.removeFromParentViewController()
+        }
     }
     
     

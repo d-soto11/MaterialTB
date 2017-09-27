@@ -88,8 +88,6 @@ extension NSLayoutConstraint {
     
     func setMultiplier(multiplier:CGFloat) -> NSLayoutConstraint {
         
-        NSLayoutConstraint.deactivate([self])
-        
         let newConstraint = NSLayoutConstraint(
             item: firstItem!,
             attribute: firstAttribute,
@@ -103,7 +101,11 @@ extension NSLayoutConstraint {
         newConstraint.shouldBeArchived = self.shouldBeArchived
         newConstraint.identifier = self.identifier
         
-        NSLayoutConstraint.activate([newConstraint])
+        UIView.animate(withDuration: 0.3) {
+            NSLayoutConstraint.deactivate([self])
+            NSLayoutConstraint.activate([newConstraint])
+        }
+        
         return newConstraint
     }
 }

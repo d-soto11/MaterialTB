@@ -12,13 +12,13 @@ iOS 11 has introduced TabBars into many of their apps, this style of navigation 
 
 After installing the pod the steps are really simple:
 
-1. In your storyboard add an empty ViewController
+#### 1. In your storyboard add an empty ViewController
 
 ![alt text](https://preview.ibb.co/gQ69Jk/Screen_Shot_2017_09_26_at_10_17_34_PM.png "Storyboard")
 
 Make sure that this View Controller's custom class is `MaterialTB` same as its module.
 
-2. Add your ViewContollers how ever you like, with one condition: Your controller must extend from MaterialViewController
+#### 2. Add your ViewContollers how ever you like, with one condition: Your controller must extend from MaterialViewController
 
 ```swift
 import UIKit
@@ -38,7 +38,7 @@ class ViewController: MaterialViewController {
 }
 ```
 
-3. Configure Segues in Storyboard
+#### 3. Configure Segues in Storyboard
 
 This is where the magic happens, when you have both your MaterialTB VC and your custom view controller that extends from MaterialViewController, you can ctrl+drag from MaterialTB to your View Controller to create a segue. In the popover you choose 'material view'
 
@@ -47,19 +47,23 @@ This is where the magic happens, when you have both your MaterialTB VC and your 
 Then in the atributes insepctor of the segue, set the 'Identifier' to be the number of this view in your TabBar i.e: 1, 2, 3, 4, 5. 
 
 
-4. Configure View Controller info
+#### 4. Configure View Controller info
 
 You can configure the information that will display in the TabBar for each View Controller in the Atributes Inspector of the View Controller
 
 ![alt text](https://preview.ibb.co/j0var5/Screen_Shot_2017_09_26_at_10_34_10_PM.png "Controller setup")
 
-Selected Image: The image that will display on the TabItem when this view controller is selected.
+Selected Image: The image that will display on the TabItem when this view controller is selected. To achieve a better look-and-feel we recomend you to use a slightly biggrer image here than in the Idle Image.
 
 Idle Image: The image that will display on the TabItem when this view controller is not selected.
 
 Tab Title: The title for this view controller on the TabBar. You can leave it blank to have no text on the Tab.
 
-5. You're all setup! At this point your TabBar should work. Take into account that a TabBar-like navigation is recomended for 3-5 view controllers. MaterialTB supports 1 to 5 view controllers.
+#### 5. You're all setup! At this point your TabBar should work. Take into account that a TabBar-like navigation is recomended for 3-5 view controllers. MaterialTB supports 1 to 5 view controllers.
+
+### Demo
+
+<a href="https://imgflip.com/gif/1wlkxn"><img src="https://i.imgflip.com/1wlkxn.gif" title="made at imgflip.com"/></a>
 
 ### Customization
 
