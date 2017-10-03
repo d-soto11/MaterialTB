@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "MaterialTB"
-  s.version      = "0.6.0"
+  s.version      = "0.7.0"
   s.summary      = "Material Design TabBar made in Swift with beautiful animations."
   s.requires_arc = true
 

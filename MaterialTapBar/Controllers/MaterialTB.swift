@@ -9,9 +9,9 @@
 import UIKit
 
 @IBDesignable
-class MaterialTB: UIViewController {
-    private static var currentTapBar: MaterialTB?
-    private(set) public static var tapBarLoaded: Bool = false
+public class MaterialTB: UIViewController {
+    private(set) public static var currentTabBar: MaterialTB?
+    private(set) public static var tabBarLoaded: Bool = false
     
     @IBInspectable var initialViewController: Int = 1 {
         didSet {
@@ -60,7 +60,7 @@ class MaterialTB: UIViewController {
     
     private var viewControllers: [Int:MaterialViewController] = [:]
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         
         // Configure views
@@ -156,8 +156,8 @@ class MaterialTB: UIViewController {
         swipeLeft.direction = UISwipeGestureRecognizerDirection.left
         self.view.addGestureRecognizer(swipeLeft)
         
-        MaterialTB.currentTapBar = self
-        MaterialTB.tapBarLoaded = true
+        MaterialTB.currentTabBar = self
+        MaterialTB.tabBarLoaded = true
         
         self.performSpecialSegue(id: "1", sender: self)
         self.performSpecialSegue(id: "2", sender: self)
@@ -218,12 +218,12 @@ class MaterialTB: UIViewController {
         self.labels[index] = label
     }
     
-    override func didReceiveMemoryWarning() {
+    override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidLayoutSubviews() {
+    override public func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.tabBarBackground.addInvertedShadow()
         
