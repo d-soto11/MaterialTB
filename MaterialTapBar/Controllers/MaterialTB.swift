@@ -190,6 +190,7 @@ public class MaterialTB: UIViewController {
         self.buttonsStackView.insertArrangedSubview(button, at: index)
         
         let image = UIImageView()
+        image.contentMode = .scaleAspectFit
         let label = UILabel()
         
         let imageWidthConstraint = NSLayoutConstraint(item: image, attribute: .width, relatedBy: .equal, toItem: button, attribute: .width, multiplier: 1, constant: 0)
@@ -209,7 +210,7 @@ public class MaterialTB: UIViewController {
         
         // Configure Images and label
         image.image = vc.idleImage
-        image.highlightedImage = vc.selectedImage
+        image.highlightedImage = vc.selectedImage ?? vc.idleImage?.maskWithColor(color: selectedTint)
         label.text = vc.tabTitle
         label.font = font
         label.textAlignment = .center
