@@ -237,6 +237,7 @@ public class MaterialTB: UIViewController {
                 home.didMove(toParentViewController: self)
                 images[selectedIndex]?.isHighlighted = true
                 labels[selectedIndex]?.textColor = self.selectedTint
+                self.animateTabbar()
             } else {
                 print("The view controller selcted as initialViewController has not been configured. Make sure you added the material view segue and that the identifier is configured correctly")
             }
@@ -305,6 +306,28 @@ public class MaterialTB: UIViewController {
         self.addChildViewController(selected_vc)
         selected_vc.didMove(toParentViewController: self)
         
+        self.animateTabbar()
+        
+        let previous_vc = self.viewControllers[previousIndex]!
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.layoutIfNeeded()
+            self.images[previousIndex]!.isHighlighted = false
+            self.labels[previousIndex]!.textColor = self.idleTint
+            self.labels[previousIndex]!.alpha = 1
+            self.images[self.selectedIndex]!.isHighlighted = true
+            self.labels[self.selectedIndex]!.textColor = self.selectedTint
+            self.labels[self.selectedIndex]!.alpha = 1
+            selected_vc.view.frame = self.mainView.bounds
+            previous_vc.view.frame = CGRect(x: self.mainView.bounds.origin.x - (direction * self.mainView.bounds.size.width), y: self.mainView.bounds.origin.y, width: self.mainView.bounds.size.width, height: self.mainView.bounds.size.height)
+        }) { (completed) in
+            previous_vc.willMove(toParentViewController: nil)
+            previous_vc.view.removeFromSuperview()
+            previous_vc.removeFromParentViewController()
+        }
+    }
+    
+    private func animateTabbar() {
         switch viewControllers.count {
         case 4:
             if selectedIndex == 0 {
@@ -335,23 +358,6 @@ public class MaterialTB: UIViewController {
         default:
             // Animate withoud width changes
             break
-        }
-        let previous_vc = self.viewControllers[previousIndex]!
-        
-        UIView.animate(withDuration: 0.3, animations: {
-            self.view.layoutIfNeeded()
-            self.images[previousIndex]!.isHighlighted = false
-            self.labels[previousIndex]!.textColor = self.idleTint
-            self.labels[previousIndex]!.alpha = 1
-            self.images[self.selectedIndex]!.isHighlighted = true
-            self.labels[self.selectedIndex]!.textColor = self.selectedTint
-            self.labels[self.selectedIndex]!.alpha = 1
-            selected_vc.view.frame = self.mainView.bounds
-            previous_vc.view.frame = CGRect(x: self.mainView.bounds.origin.x - (direction * self.mainView.bounds.size.width), y: self.mainView.bounds.origin.y, width: self.mainView.bounds.size.width, height: self.mainView.bounds.size.height)
-        }) { (completed) in
-            previous_vc.willMove(toParentViewController: nil)
-            previous_vc.view.removeFromSuperview()
-            previous_vc.removeFromParentViewController()
         }
     }
     
